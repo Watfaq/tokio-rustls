@@ -33,4 +33,4 @@ rustls-pemfile = "1"
 webpki = { package = "rustls-webpki", version = "0.100.0", features = ["alloc", "std"] }
 
 [patch.crates-io]
-rustls = { git = "https://github.com/Watfaq/rustls.git", rev = "6f57a01b04fcc183b1558ead439e8d9d57a5be94", default-features = false }
+rustls = { git = "https://github.com/Watfaq/rustls.git", rev = "43ecd5c610741668488e6d57857f9900a2087a5b", default-features = false }
