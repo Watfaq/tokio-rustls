@@ -13,8 +13,7 @@ rust-version = "1.56"
 
 [dependencies]
 tokio = "1.0"
-# use github and commit id without path
-rustls = { git = "https://github.com/Watfaq/rustls.git", branch = "utls-patch", default-features = false }
+rustls = { version = "0.21.0", default-features = false }
 
 [features]
 default = ["logging", "tls12"]
@@ -32,3 +31,6 @@ lazy_static = "1"
 webpki-roots = "0.23.1"
 rustls-pemfile = "1"
 webpki = { package = "rustls-webpki", version = "0.100.0", features = ["alloc", "std"] }
+
+[patch.crates-io]
+rustls = { git = "https://github.com/Watfaq/rustls.git", rev = "6f57a01b04fcc183b1558ead439e8d9d57a5be94", default-features = false }
