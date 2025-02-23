@@ -10,7 +10,7 @@ use tokio::io::{copy, split, stdin as tokio_stdin, stdout as tokio_stdout, Async
 use tokio::net::TcpStream;
 use tokio_rustls::{rustls, TlsConnector};
 
-/// Tokio Rustls client example
+/// Tokio watfaq_rustls client example
 #[derive(FromArgs)]
 struct Options {
     /// host
@@ -41,17 +41,17 @@ async fn main() -> io::Result<()> {
     let domain = options.domain.unwrap_or(options.host);
     let content = format!("GET / HTTP/1.0\r\nHost: {}\r\n\r\n", domain);
 
-    let mut root_cert_store = rustls::RootCertStore::empty();
+    let mut root_cert_store = watfaq_rustls::RootCertStore::empty();
     if let Some(cafile) = &options.cafile {
         let mut pem = BufReader::new(File::open(cafile)?);
-        for cert in rustls_pemfile::certs(&mut pem) {
+        for cert in watfaq_rustls_pemfile::certs(&mut pem) {
             root_cert_store.add(cert?).unwrap();
         }
     } else {
         root_cert_store.extend(webpki_roots::TLS_SERVER_ROOTS.iter().cloned());
     }
 
-    let config = rustls::ClientConfig::builder()
+    let config = watfaq_rustls::ClientConfig::builder()
         .with_root_certificates(root_cert_store)
         .with_no_client_auth(); // i guess this was previously the default?
     let connector = TlsConnector::from(Arc::new(config));

@@ -8,7 +8,7 @@ use std::pin::Pin;
 use std::task::Waker;
 use std::task::{Context, Poll};
 
-use rustls::ClientConnection;
+use watfaq_rustls::ClientConnection;
 use tokio::io::{AsyncRead, AsyncWrite, ReadBuf};
 
 use crate::common::{IoSession, Stream, TlsState};

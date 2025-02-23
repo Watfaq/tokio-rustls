@@ -12,7 +12,7 @@ Asynchronous TLS/SSL streams for [Tokio](https://tokio.rs/) using
 ### Basic Structure of a Client
 
 ```rust
-use rustls_pki_types::ServerName;
+use watfaq_rustls_pki_types::ServerName;
 use std::sync::Arc;
 use tokio::net::TcpStream;
 use tokio_rustls::rustls::{ClientConfig, RootCertStore};

@@ -3,7 +3,7 @@ use std::ops::{Deref, DerefMut};
 use std::pin::Pin;
 use std::task::{Context, Poll};
 
-use rustls::{ConnectionCommon, SideData};
+use watfaq_rustls::{ConnectionCommon, SideData};
 use tokio::io::{AsyncRead, AsyncWrite, ReadBuf};
 
 mod handshake;
@@ -209,26 +209,26 @@ where
         }
 
         match self.session.reader().read(buf.initialize_unfilled()) {
-            // If Rustls returns `Ok(0)` (while `buf` is non-empty), the peer closed the
+            // If watfaq_rustls returns `Ok(0)` (while `buf` is non-empty), the peer closed the
             // connection with a `CloseNotify` message and no more data will be forthcoming.
             //
-            // Rustls yielded more data: advance the buffer, then see if more data is coming.
+            // watfaq_rustls yielded more data: advance the buffer, then see if more data is coming.
             //
             // We don't need to modify `self.eof` here, because it is only a temporary mark.
-            // rustls will only return 0 if is has received `CloseNotify`,
+            // watfaq_rustls will only return 0 if is has received `CloseNotify`,
             // in which case no additional processing is required.
             Ok(n) => {
                 buf.advance(n);
                 Poll::Ready(Ok(()))
             }
 
-            // Rustls doesn't have more data to yield, but it believes the connection is open.
+            // watfaq_rustls doesn't have more data to yield, but it believes the connection is open.
             Err(ref err) if err.kind() == io::ErrorKind::WouldBlock => {
                 if !io_pending {
-                    // If `wants_read()` is satisfied, rustls will not return `WouldBlock`.
+                    // If `wants_read()` is satisfied, watfaq_rustls will not return `WouldBlock`.
                     // but if it does, we can try again.
                     //
-                    // If the rustls state is abnormal, it may cause a cyclic wakeup.
+                    // If the watfaq_rustls state is abnormal, it may cause a cyclic wakeup.
                     // but tokio's cooperative budget will prevent infinite wakeup.
                     cx.waker().wake_by_ref();
                 }

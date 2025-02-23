@@ -8,7 +8,7 @@ use std::task::{Context, Poll};
 use std::thread;
 
 use futures_util::{future::Future, ready};
-use rustls::{self, ClientConfig, ServerConnection, Stream};
+use watfaq_rustls::{self, ClientConfig, ServerConnection, Stream};
 use tokio::io::{AsyncRead, AsyncReadExt, AsyncWriteExt, ReadBuf};
 use tokio::net::TcpStream;
 use tokio_rustls::{client::TlsStream, TlsConnector};

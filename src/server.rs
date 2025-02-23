@@ -6,7 +6,7 @@ use std::os::windows::io::{AsRawSocket, RawSocket};
 use std::pin::Pin;
 use std::task::{Context, Poll};
 
-use rustls::ServerConnection;
+use watfaq_rustls::ServerConnection;
 use tokio::io::{AsyncRead, AsyncWrite, ReadBuf};
 
 use crate::common::{IoSession, Stream, TlsState};

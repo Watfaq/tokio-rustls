@@ -1,8 +1,8 @@
 mod utils {
     use std::io::{BufReader, Cursor, IoSlice};
 
-    use rustls::{ClientConfig, RootCertStore, ServerConfig};
-    use rustls_pemfile::{certs, private_key};
+    use watfaq_rustls::{ClientConfig, RootCertStore, ServerConfig};
+    use watfaq_rustls_pemfile::{certs, private_key};
     use tokio::io::{self, AsyncWrite, AsyncWriteExt};
 
     #[allow(dead_code)]

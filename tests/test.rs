@@ -7,7 +7,7 @@ use std::{io, thread};
 
 use futures_util::future::TryFutureExt;
 use lazy_static::lazy_static;
-use rustls::ClientConfig;
+use watfaq_rustls::ClientConfig;
 use tokio::io::{copy, split, AsyncReadExt, AsyncWriteExt};
 use tokio::net::{TcpListener, TcpStream};
 use tokio::sync::oneshot;
@@ -164,7 +164,7 @@ async fn lazy_config_acceptor_eof() {
 }
 
 #[tokio::test]
-async fn lazy_config_acceptor_take_io() -> Result<(), rustls::Error> {
+async fn lazy_config_acceptor_take_io() -> Result<(), watfaq_rustls::Error> {
     let (mut cstream, sstream) = tokio::io::duplex(1200);
 
     let (tx, rx) = oneshot::channel();

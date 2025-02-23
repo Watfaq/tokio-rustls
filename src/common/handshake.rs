@@ -4,8 +4,8 @@ use std::pin::Pin;
 use std::task::{Context, Poll};
 use std::{io, mem};
 
-use rustls::server::AcceptedAlert;
-use rustls::{ConnectionCommon, SideData};
+use watfaq_rustls::server::AcceptedAlert;
+use watfaq_rustls::{ConnectionCommon, SideData};
 use tokio::io::{AsyncRead, AsyncWrite};
 
 use crate::common::{Stream, SyncWriteAdapter, TlsState};

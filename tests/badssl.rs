@@ -6,7 +6,7 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::TcpStream;
 use tokio_rustls::{
     client::TlsStream,
-    rustls::{self, ClientConfig},
+    watfaq_rustls::{self, ClientConfig},
     TlsConnector,
 };
 
@@ -43,9 +43,9 @@ async fn test_tls12_vectored() -> io::Result<()> {
 }
 
 async fn test_tls12_impl(vectored: bool) -> io::Result<()> {
-    let mut root_store = rustls::RootCertStore::empty();
+    let mut root_store = watfaq_rustls::RootCertStore::empty();
     root_store.extend(webpki_roots::TLS_SERVER_ROOTS.iter().cloned());
-    let config = rustls::ClientConfig::builder_with_protocol_versions(&[&rustls::version::TLS12])
+    let config = watfaq_rustls::ClientConfig::builder_with_protocol_versions(&[&rustls::version::TLS12])
         .with_root_certificates(root_store)
         .with_no_client_auth();
 
@@ -80,9 +80,9 @@ async fn test_modern_vectored() -> io::Result<()> {
 }
 
 async fn test_modern_impl(vectored: bool) -> io::Result<()> {
-    let mut root_store = rustls::RootCertStore::empty();
+    let mut root_store = watfaq_rustls::RootCertStore::empty();
     root_store.extend(webpki_roots::TLS_SERVER_ROOTS.iter().cloned());
-    let config = rustls::ClientConfig::builder()
+    let config = watfaq_rustls::ClientConfig::builder()
         .with_root_certificates(root_store)
         .with_no_client_auth();
     let config = Arc::new(config);

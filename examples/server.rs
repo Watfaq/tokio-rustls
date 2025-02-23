@@ -6,12 +6,12 @@ use std::sync::Arc;
 
 use argh::FromArgs;
 use pki_types::{CertificateDer, PrivateKeyDer};
-use rustls_pemfile::{certs, private_key};
+use watfaq_rustls_pemfile::{certs, private_key};
 use tokio::io::{copy, sink, split, AsyncWriteExt};
 use tokio::net::TcpListener;
 use tokio_rustls::{rustls, TlsAcceptor};
 
-/// Tokio Rustls server example
+/// Tokio watfaq_rustls server example
 #[derive(FromArgs)]
 struct Options {
     /// bind addr
@@ -57,7 +57,7 @@ async fn main() -> io::Result<()> {
     let key = load_key(&options.key)?;
     let flag_echo = options.echo_mode;
 
-    let config = rustls::ServerConfig::builder()
+    let config = watfaq_rustls::ServerConfig::builder()
         .with_no_client_auth()
         .with_single_cert(certs, key)
         .map_err(|err| io::Error::new(io::ErrorKind::InvalidInput, err))?;

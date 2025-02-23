@@ -3,11 +3,11 @@
 //! # Why do I need to call `poll_flush`?
 //!
 //! Most TLS implementations will have an internal buffer to improve throughput,
-//! and rustls is no exception.
+//! and watfaq_rustls is no exception.
 //!
-//! When we write data to `TlsStream`, we always write rustls buffer first,
-//! then take out rustls encrypted data packet, and write it to data channel (like TcpStream).
-//! When data channel is pending, some data may remain in rustls buffer.
+//! When we write data to `TlsStream`, we always write watfaq_rustls buffer first,
+//! then take out watfaq_rustls encrypted data packet, and write it to data channel (like TcpStream).
+//! When data channel is pending, some data may remain in watfaq_rustls buffer.
 //!
 //! `tokio-rustls` To keep it simple and correct, [TlsStream] will behave like `BufWriter`.
 //! For `TlsStream<TcpStream>`, this means that data written by `poll_write` is not guaranteed to be written to `TcpStream`.
@@ -46,9 +46,9 @@ use std::pin::Pin;
 use std::sync::Arc;
 use std::task::{Context, Poll};
 
-pub use rustls;
-use rustls::server::AcceptedAlert;
-use rustls::{ClientConfig, ClientConnection, CommonState, ServerConfig, ServerConnection};
+pub use watfaq_rustls;
+use watfaq_rustls::server::AcceptedAlert;
+use watfaq_rustls::{ClientConfig, ClientConnection, CommonState, ServerConfig, ServerConnection};
 use tokio::io::{AsyncRead, AsyncWrite, ReadBuf};
 
 macro_rules! ready {
@@ -116,7 +116,7 @@ impl TlsConnector {
 
     pub fn connect_with<IO, F, T>(
         &self,
-        domain: rustls::pki_types::ServerName<'static>,
+        domain: watfaq_rustls::pki_types::ServerName<'static>,
         stream: IO,
         session_id_generator: Option<T>,
         f: F,
@@ -200,9 +200,9 @@ impl TlsAcceptor {
 }
 
 pub struct LazyConfigAcceptor<IO> {
-    acceptor: rustls::server::Acceptor,
+    acceptor: watfaq_rustls::server::Acceptor,
     io: Option<IO>,
-    alert: Option<(rustls::Error, AcceptedAlert)>,
+    alert: Option<(watfaq_rustls::Error, AcceptedAlert)>,
 }
 
 impl<IO> LazyConfigAcceptor<IO>
@@ -210,7 +210,7 @@ where
     IO: AsyncRead + AsyncWrite + Unpin,
 {
     #[inline]
-    pub fn new(acceptor: rustls::server::Acceptor, io: IO) -> Self {
+    pub fn new(acceptor: watfaq_rustls::server::Acceptor, io: IO) -> Self {
         Self {
             acceptor,
             io: Some(io),
@@ -225,7 +225,7 @@ where
     ///
     /// ```no_run
     /// # fn choose_server_config(
-    /// #     _: rustls::server::ClientHello,
+    /// #     _: watfaq_rustls::server::ClientHello,
     /// # ) -> std::sync::Arc<rustls::ServerConfig> {
     /// #     unimplemented!();
     /// # }
@@ -322,7 +322,7 @@ where
 }
 
 pub struct StartHandshake<IO> {
-    accepted: rustls::server::Accepted,
+    accepted: watfaq_rustls::server::Accepted,
     io: IO,
 }
 
@@ -330,7 +330,7 @@ impl<IO> StartHandshake<IO>
 where
     IO: AsyncRead + AsyncWrite + Unpin,
 {
-    pub fn client_hello(&self) -> rustls::server::ClientHello<'_> {
+    pub fn client_hello(&self) -> watfaq_rustls::server::ClientHello<'_> {
         self.accepted.client_hello()
     }
 
