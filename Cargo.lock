@@ -736,7 +736,7 @@ dependencies = [
 [[package]]
 name = "watfaq-rustls"
 version = "0.23.21"
-source = "git+https://github.com/Watfaq/rustls.git?rev=e5c519ee5077cfbcd0c8dc4a49faf0d1d591391c#e5c519ee5077cfbcd0c8dc4a49faf0d1d591391c"
+source = "git+https://github.com/Watfaq/rustls.git?rev=7c450eb87d6226083c7c4f0a9a8d85a52d5c1742#7c450eb87d6226083c7c4f0a9a8d85a52d5c1742"
 dependencies = [
  "aws-lc-rs",
  "log",
