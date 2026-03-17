@@ -14,7 +14,7 @@ exclude = ["/.github", "/examples", "/scripts"]
 
 [dependencies]
 tokio = "1.0"
-watfaq-rustls = { git = "https://github.com/Watfaq/rustls.git", rev = "7c450eb87d6226083c7c4f0a9a8d85a52d5c1742", default-features = false, features = ["std"] }
+watfaq-rustls = { git = "https://github.com/Watfaq/rustls.git", rev = "c3ab043d673029d245fd618b9bc86fd6a6109bae", default-features = false, features = ["std"] }
 pki-types = { package = "rustls-pki-types", version = "1" }
 
 [features]
